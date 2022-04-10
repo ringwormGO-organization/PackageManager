@@ -1,0 +1,11 @@
+﻿  pkg.cpp
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(3603,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(3618,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(3618,1): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(3910,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(3910,1): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(4151,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(4151,1): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\pkg.cpp(47,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\pkg.cpp(227,5): warning C4065: switch statement contains 'default' but no 'case' labels
+  pkg.vcxproj -> D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\x64\Debug\pkg.exe
