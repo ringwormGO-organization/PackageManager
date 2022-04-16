@@ -13,14 +13,22 @@
 #include <map>
 
 /* commands */
-std::string test_command = "echo Hello";
-std::string opengl_link = "https://github.com/ringwormGO-organization/Termi/raw/main/Termi-Linux-OpenGL/Termi-OpenGL";
-std::string lua_command;
+std::string opengl_link;
+std::string opengl_version_link;
+
+std::string lua_link;
+std::string lua_version_link;
+
+/* link database */
+static std::map<const std::string, const std::string> database_link = 
+{
+    {"OpenGL", opengl_version_link},
+    {"Termi-Lua", lua_version_link}
+};
 
 /* database */
-std::map<std::string, std::string> database = 
+static std::map<const std::string, const std::string> database = 
 {
-    {"test", test_command,},
     {"OpenGL", opengl_link},
-    {"Termi-Lua", lua_command}
+    {"Termi-Lua", lua_link}
 };

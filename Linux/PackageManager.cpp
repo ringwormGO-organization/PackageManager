@@ -110,36 +110,81 @@ const char* Functions::Search(std::string name)
     {
         std::cout << "Found " << search->first << " as " << search->second << '\n';
     }
+
     else
     {
         std::cout << "Unable to found " << name << "!\n";
+        return "Unable to find package";
     }
 
     return search->second.c_str();
 }
 
-/* Add function */
-void Functions::Add(std::string name, std::string link)
+const char* Functions::SearchLink(std::string name)
 {
-    auto position(end(database));
-    position = database.insert
+    auto search = database_link.find(name);
+
+    if (search != database_link.end()) 
+    {
+        return search->second.c_str();
+    }
+
+    else
+    {
+        std::cout << "Unable to found version link from package " << name << "!\n";
+        return "Unable to found package";
+    }
+}
+
+/* Add function */
+void Functions::Add(std::string name, std::string version_link, std::string download_link)
+{
+    auto position1(end(database_link));
+    position1 = database_link.insert
     (
-        position,
+        position1,
         { 
             name, 
-            link 
+            version_link
         }
     );
 
+    auto position2(end(database));
+    position2 = database.insert
+    (
+        position2,
+        { 
+            name, 
+            download_link 
+        }
+    );
+
+    SearchLink(name);
     Search(name);
 }
 
 /* Remove function */
 void Functions::Remove(std::string name)
 {
+    database_link.erase(name);
     database.erase(name);
 
+    SearchLink(name);
     Search(name);
+}
+
+/* Update function */
+int Functions::Update(std::string name)
+{
+    if (!strcmp(SearchLink(name), "Unable to found package"))
+    {
+        return 1;
+    }
+
+    else
+    {
+        return Install(name);
+    }
 }
 
 /* Install functions */
@@ -149,11 +194,13 @@ int Functions::Install(std::string name)
     {
          if (isEnding(name, ".tar.gz") | isEnding(name, ".zip"))
         {
+            /* remove older version */
             /* unpack */
         }
 
         else
         {
+            /* remove older version */
             /* move to right folder */
         }
 
@@ -376,13 +423,13 @@ int main(int argc, char** argv)
         }
         else
         {
-            if (argv[3] == NULL)
+            if (argv[3] == NULL | argv[4] == NULL)
             {
-                printf("There is no download link or command!\n");
+                printf("There is no version link and/or download link\n");
             }
             else
             {
-                functions->Add(argv[2], argv[3]);
+                functions->Add(argv[2], argv[3], argv[4]);
             }
         }
     }
@@ -396,6 +443,18 @@ int main(int argc, char** argv)
         else
         {
             functions->Remove(argv[2]);
+        }
+    }
+
+    else if (!strcmp(argv[1], "update"))
+    {
+        if (argv[2] == NULL)
+        {
+            printf("There is no software name!\n");
+        }
+        else
+        {
+            functions->Update(argv[3]);
         }
     }
 

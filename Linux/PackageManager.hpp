@@ -46,7 +46,8 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 /* Required for us */
 int isEnding (std::string const &fullString, std::string const &ending) 
 {
-    if (fullString.length() >= ending.length()) {
+    if (fullString.length() >= ending.length()) 
+    {
         return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
     } 
 
@@ -68,12 +69,16 @@ class Functions
 
         /* Serach function - returns a command or link */
         const char* Search(std::string name);
+        const char* SearchLink(std::string name);
 
         /* Add function */
-        void Add(std::string name, std::string link);
+        void Add(std::string name, std::string version_link, std::string download_link);
 
         /* Remove function */
         void Remove(std::string name);
+
+        /* Update function */
+        int Update(std::string name);
 
         /* Install functions */
         int Install(std::string name);
@@ -91,8 +96,6 @@ class Functions
         int Download(const char* name);
         /* Download a file or folder*/
         int Download(const char* name, const char* link);
-
-        static int Progress(void* ptr, double TotalToDownload, double NowDownloaded, double TotalToUpload, double NowUploaded);
 };
 
 extern Settings settings;
