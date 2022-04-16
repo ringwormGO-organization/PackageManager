@@ -1,6 +1,6 @@
 /**
  * @author: Andrej Bartulin
- * PROJECT: Termi Package Manager
+ * PROJECT: Package Manager - Windows version
  * LICENSE: BSD-3-Clause-License
  * DESCRIPTION: Database
  * 
