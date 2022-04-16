@@ -6,6 +6,7 @@
  * 
 */
 
+
 #include "PackageManager.hpp"
 #include "Database.hpp"
 
@@ -113,36 +114,81 @@ const char* Functions::Search(std::string name)
     {
         std::cout << "Found " << search->first << " as " << search->second << '\n';
     }
+
     else
     {
         std::cout << "Unable to found " << name << "!\n";
+        return "Unable to find package";
     }
 
     return search->second.c_str();
 }
 
-/* Add function */
-void Functions::Add(std::string name, std::string link)
+const char* Functions::SearchLink(std::string name)
 {
-    auto position(end(database));
-    position = database.insert
+    auto search = database_link.find(name);
+
+    if (search != database_link.end()) 
+    {
+        return search->second.c_str();
+    }
+
+    else
+    {
+        std::cout << "Unable to found version link from package " << name << "!\n";
+        return "Unable to found package";
+    }
+}
+
+/* Add function */
+void Functions::Add(std::string name, std::string version_link, std::string download_link)
+{
+    auto position1(end(database_link));
+    position1 = database_link.insert
     (
-        position,
+        position1,
         { 
             name, 
-            link 
+            version_link
         }
     );
 
+    auto position2(end(database));
+    position2 = database.insert
+    (
+        position2,
+        { 
+            name, 
+            download_link 
+        }
+    );
+
+    SearchLink(name);
     Search(name);
 }
 
 /* Remove function */
 void Functions::Remove(std::string name)
 {
+    database_link.erase(name);
     database.erase(name);
 
+    SearchLink(name);
     Search(name);
+}
+
+/* Update function */
+int Functions::Update(std::string name)
+{
+    if (!strcmp(SearchLink(name), "Unable to found package"))
+    {
+        return 1;
+    }
+
+    else
+    {
+        return Install(name);
+    }
 }
 
 /* Install functions */
@@ -152,11 +198,13 @@ int Functions::Install(std::string name)
     {
         if (isEnding(name, ".tar.gz") | isEnding(name, ".zip"))
         {
+            /* remove older version */
             /* unpack */
         }
 
         else
         {
+            /* remove older version */
             /* move to right folder */
         }
 
@@ -228,15 +276,15 @@ void Functions::Settings()
 /* Download a file or folder */
 int Functions::Download(const char* name)
 {
-    CURL* curl;
-    FILE* fp;
+    CURL *curl;
+    FILE *fp;
     CURLcode res;
     const char* url = Search(name);
     const char* outfilename = name;
 
     char tmpfilename[PATH_MAX];
     snprintf(tmpfilename, PATH_MAX - 1, "./%s.XXXXXX", outfilename);
-    int fd = _mktemp_s(tmpfilename);
+    //int fd = mkstemp(tmpfilename);
 
     indicators::ProgressBar progress_bar
     {
@@ -251,16 +299,16 @@ int Functions::Download(const char* name)
         //     std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
     };
 
-    curl = curl_easy_init();
+    curl = curl_easy_init();                                                                                                                                                                                                                                                           
     if (curl)
-    {
+    {   
         fp = fopen(tmpfilename, "wb");
         curl_easy_setopt(curl, CURLOPT_URL, url);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
         curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION,
-            download_progress_callback);
+                         download_progress_callback);
         curl_easy_setopt(curl, CURLOPT_XFERINFODATA,
-            static_cast<void*>(&progress_bar));
+                         static_cast<void*>(&progress_bar));
         curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
         // Perform a file transfer synchronously.
         res = curl_easy_perform(curl);
@@ -271,7 +319,7 @@ int Functions::Download(const char* name)
         {
             printf("Downloaded %s as %s.\n", tmpfilename, outfilename);
         }
-
+        
         else
         {
             printf("Unable to download %s as %s!\n", tmpfilename, outfilename);
@@ -298,7 +346,7 @@ int Functions::Download(const char* name, const char* link)
 
     char tmpfilename[PATH_MAX];
     snprintf(tmpfilename, PATH_MAX - 1, "./%s.XXXXXX", outfilename);
-    int fd = _mktemp_s(tmpfilename);
+    //int fd = mkstemp(tmpfilename);
 
     indicators::ProgressBar progress_bar
     {
@@ -379,13 +427,13 @@ int main(int argc, char** argv)
         }
         else
         {
-            if (argv[3] == NULL)
+            if (argv[3] == NULL | argv[4] == NULL)
             {
-                printf("There is no download link or command!\n");
+                printf("There is no version link and/or download link\n");
             }
             else
             {
-                functions->Add(argv[2], argv[3]);
+                functions->Add(argv[2], argv[3], argv[4]);
             }
         }
     }
@@ -399,6 +447,18 @@ int main(int argc, char** argv)
         else
         {
             functions->Remove(argv[2]);
+        }
+    }
+
+    else if (!strcmp(argv[1], "update"))
+    {
+        if (argv[2] == NULL)
+        {
+            printf("There is no software name!\n");
+        }
+        else
+        {
+            functions->Update(argv[3]);
         }
     }
 

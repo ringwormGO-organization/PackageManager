@@ -33,9 +33,6 @@
 /* GitHub repo link */
 const char* repo_link = "https://github.com/ringwormGO-organization/Termi";
 
-/* Operating system information */
-int host;
-
 /* struct which contains settings for package manager */
 struct Settings
 {
@@ -60,7 +57,8 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 /* Required for us */
 int isEnding (std::string const &fullString, std::string const &ending) 
 {
-    if (fullString.length() >= ending.length()) {
+    if (fullString.length() >= ending.length()) 
+    {
         return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
     } 
 
@@ -82,12 +80,16 @@ class Functions
 
         /* Serach function - returns a command or link */
         const char* Search(std::string name);
+        const char* SearchLink(std::string name);
 
         /* Add function */
-        void Add(std::string name, std::string link);
+        void Add(std::string name, std::string version_link, std::string download_link);
 
         /* Remove function */
         void Remove(std::string name);
+
+        /* Update function */
+        int Update(std::string name);
 
         /* Install functions */
         int Install(std::string name);

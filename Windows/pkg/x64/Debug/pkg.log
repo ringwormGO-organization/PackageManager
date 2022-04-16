@@ -6,6 +6,7 @@ D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\Packa
 D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(3910,1): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
 D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(4151,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\indicators.hpp(4151,1): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\pkg.cpp(43,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\pkg.cpp(223,5): warning C4065: switch statement contains 'default' but no 'case' labels
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\pkg.cpp(44,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\pkg.cpp(271,5): warning C4065: switch statement contains 'default' but no 'case' labels
+D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\pkg.cpp(430,50): warning C4554: '|': check operator precedence for possible error; use parentheses to clarify precedence
   pkg.vcxproj -> D:\AndrejBackup\Andrej\PRIVATNO-duboko\Ostali\RingwormGo\RingwormGO\GitHub\PackageManager\Windows\pkg\x64\Debug\pkg.exe
